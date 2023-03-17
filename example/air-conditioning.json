@@ -1,0 +1,64 @@
+{
+    "inputs": [
+        {
+            "name": "T",
+            "length": 8
+        }
+    ],
+    "outputs": [
+        {
+            "name": "cooler",
+            "length": 1
+        },
+        {
+            "name": "heater",
+            "length": 1
+        }
+    ],
+    "states": [
+        {
+            "name": "S1",
+            "transitions": [
+                {
+                    "destination": "S2",
+                    "condition": "T > 35"
+                },
+                {
+                    "destination": "S3",
+                    "condition": "T < 15"
+                }
+            ],
+            "outputs": {
+                "cooler": 0,
+                "heater": 0
+            }
+        },
+        {
+            "name": "S2",
+            "transitions": [
+                {
+                    "destination": "S1",
+                    "condition": "T < 25"
+                }
+            ],
+            "outputs": {
+                "cooler": 1,
+                "heater": 0
+            }
+        },
+        {
+            "name": "S3",
+            "transitions": [
+                {
+                    "destination": "S1",
+                    "condition": "T > 30"
+                }
+            ],
+            "outputs": {
+                "cooler": 0,
+                "heater": 1
+            }
+        }
+    ],
+    "initial_state": "S1"
+}
