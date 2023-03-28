@@ -1,4 +1,4 @@
-from model.fsm import *
+from src.model.fsm import *
 import typer
 
 app = typer.Typer()

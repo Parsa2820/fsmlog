@@ -2,6 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import json
 from dacite import from_dict
+import jinja2
 
 
 @dataclass
@@ -25,6 +26,7 @@ class State:
 
 @dataclass
 class FiniteStateMachine:
+    TEMPLATE_PATH = "src/template.v"
     inputs: list[Register]
     outputs: list[Register]
     states: list[State]
@@ -54,4 +56,9 @@ class FiniteStateMachine:
                         f"Output {output} value {state.outputs[output]} is greater than register length {register.length}")
 
     def to_verilog(self) -> str:
-        return "TODO"
+        with open(self.TEMPLATE_PATH, "r") as f:
+            template = jinja2.Template(f.read())
+        import math
+        template.globals["log2"] = math.log2
+        template.globals["ceil"] = math.ceil
+        return template.render(fsm=self)
