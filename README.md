@@ -1,5 +1,19 @@
 # fsmlog
+[![Upload Python Package](https://github.com/Parsa2820/fsmlog/actions/workflows/python-publish.yml/badge.svg)](https://github.com/Parsa2820/fsmlog/actions/workflows/python-publish.yml)
+
 A tool for converting finite state machine to verilog code
+
+Embedded Systems Course Optional Assignment - Spring 2023
+
+Parsa Mohammadian - 98102284
+
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+    - [Validate](#validate)
+    - [Convert](#convert)
+- [Specifications](#specifications)
+- [Technical Details](#technical-details)
 
 ## Installation
 From pypi:
@@ -57,3 +71,8 @@ The `outputs` field is just key-value pairs of the output registers. The `transi
 The `condition` field must be a valid verilog boolean expression.
 
 > Valid input file examples can be found in the [example](example) directory.
+
+## Technical Details
+The tool uses [jinja2](https://jinja.palletsprojects.com/en/3.0.x/) to generate the verilog code. The `template.v` file can be found in the [src](src) directory. This template can be populated with the `FiniteStateMachine` object named `fsm`. The `FiniteStateMachine` object is created from the input file using the `FiniteStateMachine.from_json` method. The `FiniteStateMachine` class has similar attributes to the input file's structure. The `FiniteStateMachine` class can be found in the [src/model/fsm.py](src/model/fsm.py) file.
+
+
