@@ -14,6 +14,7 @@ Parsa Mohammadian - 98102284
     - [Convert](#convert)
 - [Specifications](#specifications)
 - [Technical Details](#technical-details)
+- [Example](#example)
 
 ## Installation
 From pypi:
@@ -75,4 +76,23 @@ The `condition` field must be a valid verilog boolean expression.
 ## Technical Details
 The tool uses [jinja2](https://jinja.palletsprojects.com/en/3.0.x/) to generate the verilog code. The `template.v` file can be found in the [src](src) directory. This template can be populated with the `FiniteStateMachine` object named `fsm`. The `FiniteStateMachine` object is created from the input file using the `FiniteStateMachine.from_json` method. The `FiniteStateMachine` class has similar attributes to the input file's structure. The `FiniteStateMachine` class can be found in the [src/model/fsm.py](src/model/fsm.py) file.
 
+## Example
+Consider the following finite state machine:
+![air-conditioning](example/air-conditioning.png)
 
+We can encode this finite state machine as specified in [specifications](#specifications). The encoded file can be found in the [example](example) directory. The file is named `air-conditioning.json`.
+
+The following command will validate the input file:
+```bash
+fsmlog validate example/air-conditioning.json
+```
+```
+FSM example/air-conditioning.json is valid
+```
+Now we can convert the input file to verilog code:
+```bash
+fsmlog convert example/air-conditioning.json --output example/air-conditioning.v
+```
+The generated verilog code can be found in the [example](example) directory. The file is named `air-conditioning.v`.
+
+The resulting verilog code can be both simulated and synthesized.
